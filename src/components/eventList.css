@@ -1,0 +1,23 @@
+
+.title{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.event-item{
+    width: 20rem;
+}
+
+.event-item a{
+    text-decoration: none;
+}
+
+.card-title{
+    font-weight: 700;
+}
+
+.price-card{
+    color: white;
+    font-weight: 700;
+    background-color: orange;
+}

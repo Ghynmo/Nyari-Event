@@ -1,0 +1,8 @@
+
+.carousel-item{
+    height: 80vh;
+}
+
+.carousel-item img{
+    height: fit-content;
+}

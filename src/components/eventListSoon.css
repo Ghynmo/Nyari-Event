@@ -1,0 +1,13 @@
+.title{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.number h1{
+    width: 20px;
+}
+
+.event-box{
+    color: white;
+    background-color: rgb(142, 45, 211);
+}

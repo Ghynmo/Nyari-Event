@@ -1,0 +1,14 @@
+.title{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.filter-input, .filter button{
+    align-items: center;
+    height: fit-content;
+}
+
+.input-box{
+    width: 150px;
+    margin-right: 20px;
+}
