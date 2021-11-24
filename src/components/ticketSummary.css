@@ -1,0 +1,28 @@
+
+.buy-ticket{
+    height: fit-content;
+    min-width: 25%;
+    color: white;
+    position: fixed;
+    overflow-y: auto;
+    right: 0;
+    margin-right: 4rem;
+    background-color: #424242;
+}
+
+.buy-subtitle{
+    width: 100px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.buy-ticket select{
+    width: 100px;
+}
+
+.buy-btn{
+    font-weight: 600;
+    border: none;
+    color: black;
+    background: white;
+}
