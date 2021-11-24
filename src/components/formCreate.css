@@ -1,0 +1,9 @@
+.choose-img{
+    width: 100%;
+    height: 200px;
+    background-color: lavender;
+}
+
+.pricing label{
+    margin-right: 20px;
+}

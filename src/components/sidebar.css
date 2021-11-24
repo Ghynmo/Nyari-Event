@@ -1,0 +1,23 @@
+.sidebar{
+    color: white;
+    background: #424242;
+    min-height: 100vh;
+    position: fixed;
+    overflow-y: auto;
+    width: 200px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.user-img{
+    height: 150px;
+    border-radius: 100%;
+}
+
+.menu{
+    list-style: none;
+}
+
+.menu a{
+    color: white;
+}
