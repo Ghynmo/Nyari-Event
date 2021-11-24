@@ -1,0 +1,20 @@
+.information-container{
+    width: 90%;
+}
+
+.event-banner{
+    height: 65vh;
+}
+
+.event-banner img{
+    height: 65vh;
+}
+
+.sub-title{
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.map-img{
+    height: 300px;
+}
