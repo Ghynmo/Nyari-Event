@@ -1,0 +1,25 @@
+h2{
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.signin-container{
+    height: 100vh;
+    background-color: #424242;
+}
+
+.signin-card{
+    min-width: 350px;
+}
+
+.hr-short{
+    width: 40px;
+}
+
+button{
+    color: white;
+    font-weight: 600;
+    border: none;
+    background-color: #424242;
+    padding: 10px 20px;
+}
