@@ -10,10 +10,10 @@ export default function Sidebar() {
                 <div className="user-name">M Ghifari</div>
             </div>
             <ul className="menu pt-5">
-                <li className="profile mb-2"><a href="">Profile</a></li>
-                <li className="my-event mb-2"><a href="">My Event List</a></li>
-                <li className="create-event mb-2"><a href="">Create Event</a></li>
-                <li className="Logout mb-2"><a href="">Logout</a></li>
+                <li className="profile mb-2">Profile</li>
+                <li className="my-event mb-2">My Event List</li>
+                <li className="create-event mb-2">Create Event</li>
+                <li className="Logout mb-2">Logout</li>
             </ul>
         </div>
     )
