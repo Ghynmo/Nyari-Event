@@ -1,4 +1,7 @@
 nav{
-    color: white;
     background-color: #424242;
+}
+
+.nav-link{
+    color: white !important;
 }

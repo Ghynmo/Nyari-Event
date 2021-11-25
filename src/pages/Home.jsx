@@ -17,7 +17,7 @@ export default function Home() {
             <div className="content mx-5 p-4">
                 <Filter/>
                 <EventList/>
-                <div className="upcoming-list d-flex justify-content-between">
+                <div className="upcoming-list row">
                     <EventListSoon/>
                     <AnotherEvent/>
                 </div>
