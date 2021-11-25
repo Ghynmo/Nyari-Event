@@ -4,11 +4,11 @@
 }
 
 .side-ticket{
-    width: 25%;
+    /* width: 25%; */
     height: fit-content;
-    position: fixed;
-    overflow-y: auto;
-    right: 5%;
+    /* position: fixed; */
+    /* overflow-y: auto; */
+    /* right: 5%; */
 }
 
 .ticket .title{

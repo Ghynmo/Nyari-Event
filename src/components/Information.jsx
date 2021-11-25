@@ -7,7 +7,7 @@ export default function Information() {
     return (
         <div className="information-container pb-3">
             <div className="event-banner mb-4">
-                <img src={ConcertImg} alt=""/>
+                <img className="w-100" src={ConcertImg} alt=""/>
             </div>
             <div className="information">
                 <h2 className="title">ROCKING CONCERT</h2>
@@ -33,12 +33,12 @@ export default function Information() {
                     <span className="sub-title">Contact Person</span>
                     <p>Email : anonymous@mail.com</p>
                 </div>
-                <div className="addional-info d-flex mb-3">
-                    <div className="map">
+                <div className="addional-info row d-flex mb-3">
+                    <div className="map col-sm-8">
                         <p className="sub-title">Map</p>
-                        <img className="map-img" src={MapImg} alt=""/>
+                        <img className="map-img w-100" src={MapImg} alt=""/>
                     </div>
-                    <div className="share-info d-flex bottom-0">
+                    <div className="share-info col-sm-4 d-flex bottom-0">
                         <p>Share</p>
                         <div className="icon d-flex">
                             <span>Facebook</span>

@@ -3,11 +3,11 @@
 }
 
 .event-banner{
-    height: 65vh;
+    max-height: 65vh;
 }
 
 .event-banner img{
-    height: 65vh;
+    height: fit-content;
 }
 
 .sub-title{
@@ -15,6 +15,10 @@
     font-weight: 500;
 }
 
-.map-img{
-    height: 300px;
+.map{
+    max-height: 65vh;
+}
+
+.map img{
+    height: fit-content;
 }

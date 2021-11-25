@@ -8,8 +8,8 @@ export default function EventDetail() {
     return (
         <div className="mx-5 p-4">
             <BreadCrumb/>
-            <div className="w-100 d-flex">
-                <div className="w-75">
+            <div className="w-100 row d-flex">
+                <div className="col-12 col-sm-9">
                     <Information/>
                     <Comment/>
                 </div>

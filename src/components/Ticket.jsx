@@ -3,50 +3,31 @@ import './ticket.css'
 
 export default function Ticket() {
     return (
-        <div className="side-ticket p-2 text-center w-25">
+        <div className="side-ticket col-12 col-sm-3 p-2">
             <h1>Get the Ticket</h1>
             <hr/>
             <div className="ticket-list">
-                <div className="ticket d-flex p-2 mb-3">
-                    <div className="ticket-left me-auto">
-                        <p className="title">VVIP</p>
+                <div className="ticket row rounded-3 d-flex p-2 mb-3">
+                    <div className="ticket-left col-3 col-sm-12 col-md-6 me-auto">
+                        <p className="title">Type1</p>
                         <p className="price">$35</p>
                     </div>
-                    <div className="ticket-right">
-                        <div className="quantity">
+                    <div className="ticket-right col-3 col-sm-12 col-md-6">
+                        <div className="quantity d-flex flex-column align-items-center">
                             <p className="mb-1">Quantity</p>
                             <div className="ticket-btn d-flex mb-3">
-                                <button className="ticket-min">-</button>
-                                <div className="counter">1</div>
-                                <button className="ticket-add">+</button>
+                                <button className="btn btn-light ticket-min">-</button>
+                                <div className="counter text-center">1</div>
+                                <button className="btn btn-light ticket-add">+</button>
                             </div>
                         </div>
-                        <select className="date" name="date" id="">
-                            <option value="date">Date</option>
-                        </select>
-                    </div>
-                </div>
-                <div className="ticket d-flex p-2 mb-3">
-                    <div className="ticket-left me-auto">
-                        <p className="title">VIP</p>
-                        <p className="price">$25</p>
-                    </div>
-                    <div className="ticket-right">
-                        <div className="quantity">
-                            <p className="mb-1">Quantity</p>
-                            <div className="ticket-btn d-flex mb-3">
-                                <button className="ticket-min">-</button>
-                                <div className="counter">1</div>
-                                <button className="ticket-add">+</button>
-                            </div>
-                        </div>
-                        <select className="date" name="date" id="">
+                        <select className="date form-select" name="date" id="">
                             <option value="date">Date</option>
                         </select>
                     </div>
                 </div>
             </div>
-            <button className="get-ticket my-1 py-2 w-100">ADD TO CART</button>
+            <button className="btn text-white get-ticket my-1 py-2 w-100">ADD TO CART</button>
         </div>
     )
 }
