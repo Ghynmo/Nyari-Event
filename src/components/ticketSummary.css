@@ -1,11 +1,11 @@
 
 .buy-ticket{
     height: fit-content;
-    min-width: 25%;
+    /* min-width: 25%; */
     color: white;
-    position: fixed;
-    overflow-y: auto;
-    right: 0;
+    /* position: fixed; */
+    /* overflow-y: auto; */
+    /* right: 0; */
     margin-right: 4rem;
     background-color: #424242;
 }

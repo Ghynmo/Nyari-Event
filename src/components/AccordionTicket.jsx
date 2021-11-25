@@ -3,7 +3,7 @@ import './accordionTicket.css'
 
 export default function AccordionTicket() {
     return (
-        <div className="accordion me-5" id="accordionPanelsStayOpenExample">
+        <div className="accordion col-12 col-sm-8 me-5 pb-3" id="accordionPanelsStayOpenExample">
             <div className="accordion-item">
                 <h2 className="accordion-header" id="panelsStayOpen-headingOne">
                     <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
