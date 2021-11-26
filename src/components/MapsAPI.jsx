@@ -8,8 +8,8 @@ export default function MapsAPI() {
         width: "50%"};
 
     const [maps, setmaps] = useState({
-        latitude: '',
-        longitude: ''
+        latitude: null,
+        longitude: null
     })
 
     useEffect(() => {
