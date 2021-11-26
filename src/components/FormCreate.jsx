@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import MapsAPI from './MapsAPI'
 import './formCreate.css'
 
 export default function FormCreate() {
@@ -23,18 +24,20 @@ export default function FormCreate() {
         }],
         description: ''
     }
-    
+
     const [data, setdata] = useState(initialState)
     const [today, settoday] = useState('')
     const [array, setarray] = useState([])
-
+    const [tagCounter, settagCounter] = useState(1)
+    const [tagDisplay, settagDisplay] = useState("none")
+    
     useEffect(() => {
         var getDate = new Date();
         settoday (getDate.getFullYear()+'-'+(getDate.getMonth()+1)+'-'+getDate.getDate())
     }, [])
 
-
     const onChangeHandle = (e) => {
+        e.preventDefault()
         setdata({
             ...data,
             [e.target.name]: e.target.value
@@ -42,6 +45,7 @@ export default function FormCreate() {
     }
 
     const onChangeTag = (e) => {
+        e.preventDefault()
         setarray([
             e.target.value
         ])
@@ -49,17 +53,35 @@ export default function FormCreate() {
 
     const onClickTag = (e) => {
         e.preventDefault()
+        if (array[0] !== undefined){
+            setdata((prevState) =>({
+                ...prevState,
+                tag: [...prevState.tag,{
+                    id: tagCounter,
+                    tagValue: array[0]
+                }]
+            }))
+            settagCounter(tagCounter+1)
+            setarray([])
+        } else{
+            console.log('Tag Must be filled')
+        }
+        settagDisplay("")
+    }
+
+    const deleteTag = (id) => {
+        console.log(id)
+        const newTag = data.tag.filter((item)=>item.id !== id)
         setdata((prevState) =>({
             ...prevState,
             tag: [
-                ...prevState.tag,
-                array[0]  
+                newTag
             ]
         }))
-        setarray([])
     }
 
     const onChangeContact = (e) => {
+        e.preventDefault()
         setdata((prevState) =>({
             ...prevState,
             contact: {
@@ -68,6 +90,7 @@ export default function FormCreate() {
             }
         }))
     }
+
 
     return (
         <div className="event-form col-sm-10">
@@ -89,10 +112,21 @@ export default function FormCreate() {
                     <div className="d-flex pb-4">
                         <div className="col-sm-4 d-flex flex-column">
                             <label className="form-label" htmlFor="">Tag</label>
-                            <input className="form-control" type="text" value={array} name="tag" onChange={onChangeTag}/>
+                            <div className="d-flex mb-1">
+                                <input className="form-control" type="text" value={array} name="tag" onChange={onChangeTag}/>
+                                <button className="btn btn-warning h-100 w-25" type="button" onClick={onClickTag} onKeyPress={e=>e.key === 'enter'? {onClickTag}:console.log('hehehS')}>Enter</button>
+                            </div>
+                            <div>
+                                {(data.tag).map((val)=>
+                                    <div style={{display: tagDisplay}}>
+                                        <div className="btn btn-sm btn-secondary m-1">
+                                            {val.tagValue} 
+                                            <button className="btn btn-sm btn-dark ms-2 text-white-50" key={val.id} onClick={()=>{deleteTag(val.id)}}>X</button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                        <button className="btn btn-warning" type="button" onClick={onClickTag} onKeyPress={e=>e.key === 'enter'? {onClickTag}:console.log('hehehS')}>Enter</button>
-                        {(data.tag).map((val, idx)=> <button key={idx}>{val}</button>)}
                         <div className="col-sm-3 d-flex flex-column ms-4">
                             <label className="form-label" htmlFor="">Category</label>
                             <select className="form-select" name="category" id="" onChange={onChangeHandle}>
@@ -179,6 +213,8 @@ export default function FormCreate() {
                         <label className="form-label" htmlFor="">Description</label>
                         <textarea className="form-control" name="" id="" cols="30" rows="10"></textarea>
                     </div>
+
+                    <MapsAPI/>
 
                     <div className="text-end">
                         <button className="btn btn-primary" type="submit">Save</button>
