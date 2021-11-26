@@ -16,11 +16,12 @@ export default function FormCreate() {
             email: '',
             phone: 0
         },
-        price: false,
+        pricing: false,
         ticket: [{
+            ticketID: null,
             ticketType: '',
-            price: 0,
-            information: ''
+            ticketPrice: 0,
+            ticketInfo: '',
         }],
         description: ''
     }
@@ -29,7 +30,7 @@ export default function FormCreate() {
     const [today, settoday] = useState('')
     const [array, setarray] = useState([])
     const [tagCounter, settagCounter] = useState(1)
-    const [tagDisplay, settagDisplay] = useState("none")
+    const [ticketCounter, setticketCounter] = useState(1)
     
     useEffect(() => {
         var getDate = new Date();
@@ -44,7 +45,7 @@ export default function FormCreate() {
         })
     }
 
-    const onChangeTag = (e) => {
+    const onChangeArray = (e) => {
         e.preventDefault()
         setarray([
             e.target.value
@@ -66,18 +67,14 @@ export default function FormCreate() {
         } else{
             console.log('Tag Must be filled')
         }
-        settagDisplay("")
     }
 
     const deleteTag = (id) => {
-        console.log(id)
         const newTag = data.tag.filter((item)=>item.id !== id)
-        setdata((prevState) =>({
-            ...prevState,
-            tag: [
-                newTag
-            ]
-        }))
+        setdata({
+            ...data,
+            tag: newTag
+        })
     }
 
     const onChangeContact = (e) => {
@@ -91,11 +88,20 @@ export default function FormCreate() {
         }))
     }
 
+    const onChangeTickets = (e) => {
+        e.preventDefault()
+        setdata((prevState) =>({
+            ...prevState,
+            ticket: {
+                ...prevState.ticket,
+                [e.target.name]: e.target.value
+            }
+        }))
+    }
 
     return (
         <div className="event-form col-sm-10">
-            {console.log(data.tag)}
-            {/* {console.log(array)} */}
+            {console.log(data)}
             
             <h3 className="col-sm-12">Create New Event</h3>
             <div>
@@ -113,15 +119,15 @@ export default function FormCreate() {
                         <div className="col-sm-4 d-flex flex-column">
                             <label className="form-label" htmlFor="">Tag</label>
                             <div className="d-flex mb-1">
-                                <input className="form-control" type="text" value={array} name="tag" onChange={onChangeTag}/>
-                                <button className="btn btn-warning h-100 w-25" type="button" onClick={onClickTag} onKeyPress={e=>e.key === 'enter'? {onClickTag}:console.log('hehehS')}>Enter</button>
+                                <input className="form-control" type="text" value={array} name="tag" onChange={onChangeArray}/>
+                                <button className="btn btn-warning h-100 w-25" type="button" onClick={onClickTag}>Enter</button>
                             </div>
                             <div>
                                 {(data.tag).map((val)=>
-                                    <div style={{display: tagDisplay}}>
-                                        <div className="btn btn-sm btn-secondary m-1">
-                                            {val.tagValue} 
-                                            <button className="btn btn-sm btn-dark ms-2 text-white-50" key={val.id} onClick={()=>{deleteTag(val.id)}}>X</button>
+                                    <div>
+                                        <div className="btn btn-sm btn-secondary m-1" key={val.id}>
+                                            {val.tagValue}
+                                            <button className="btn btn-sm btn-dark ms-2 text-white-50" onClick={()=>{deleteTag(val.id)}}>X</button>
                                         </div>
                                     </div>
                                 )}
@@ -175,12 +181,12 @@ export default function FormCreate() {
                         <div className="pricing d-flex">
                             <p className="me-3">Pricing</p>
                             <div className="form-check">
-                                <input className="form-check-input" name="pricing" id="flexRadioDefault1" value="false" onChange={onChangeContact} type="radio" defaultChecked/>
-                                <label className="form-label" htmlFor="flexRadioDefault1">Free</label>
+                                <input className="form-check-input" name="pricing" id="flexRadioDefault1" value="false" type="radio" onChange={onChangeHandle} defaultChecked/>
+                                <label className="form-check-label" htmlFor="flexRadioDefault1">Free</label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" name="pricing" id="flexRadioDefault2" value="true" onChange={onChangeContact} type="radio"/>
-                                <label className="form-label" htmlFor="flexRadioDefault2">Paid</label>
+                                <input className="form-check-input" name="pricing" id="flexRadioDefault2" value="true" type="radio" onChange={onChangeHandle}/>
+                                <label className="form-check-label" htmlFor="flexRadioDefault2">Paid</label>
                             </div>
                         </div>
                         <div>Ticket List
@@ -196,10 +202,10 @@ export default function FormCreate() {
 
                                 <tbody>
                                     <tr className="">
-                                        <td className="col-sm-1">1</td>
-                                        <td className="col-sm-4"><input className="form-control" type="text"/></td>
-                                        <td className="col-sm-2"><input className="form-control" type="number" min="0" step="0.1"/></td>
-                                        <td className="col-sm-5"><textarea className="form-control" cols="30" rows="2"/></td>
+                                        <td className="col-sm-1">{ticketCounter}</td>
+                                        <td className="col-sm-4"><input className="form-control" type="text" name="ticketType" onChange={onChangeTickets}/></td>
+                                        <td className="col-sm-2"><input className="form-control" type="number" min="0" step="0.1" name="ticketPrice" onChange={onChangeTickets}/></td>
+                                        <td className="col-sm-5"><textarea className="form-control" cols="30" rows="2" name="ticketInfo" onChange={onChangeTickets}/></td>
                                     </tr>
                                 </tbody>
                             </table>
