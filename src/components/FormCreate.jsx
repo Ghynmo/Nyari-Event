@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import MapsAPI from './MapsAPI'
+import useInsertEvent from '../hooks/useInsertEvent'
+// import MapsAPI from './MapsAPI'
 import './formCreate.css'
 
 export default function FormCreate() {
@@ -17,26 +18,43 @@ export default function FormCreate() {
             phone: 0
         },
         pricing: false,
-        ticket: [{
-            ticketID: null,
-            ticketType: '',
-            ticketPrice: 0,
-            ticketInfo: '',
-        }],
+        ticket: [],
         description: ''
     }
-
+    
+    const {insertEvent, loadingInsert} = useInsertEvent()
+    
     const [data, setdata] = useState(initialState)
     const [today, settoday] = useState('')
     const [array, setarray] = useState([])
+    const [object, setobject] = useState({
+        ticketID:'',
+        ticketType:'',
+        ticketPrice:0,
+        ticketInfo:'',
+    })
     const [tagCounter, settagCounter] = useState(1)
     const [ticketCounter, setticketCounter] = useState(1)
+    const [getDate, setgetDate] = useState(null)
+    
     
     useEffect(() => {
         var getDate = new Date();
         settoday (getDate.getFullYear()+'-'+(getDate.getMonth()+1)+'-'+getDate.getDate())
     }, [])
-
+    
+    useEffect(() => {
+        let date = new Date(data.date)
+        console.log(date.getDate())
+        console.log(date.getMonth()+1)
+        console.log(date.getFullYear())
+        setgetDate(date)
+    }, [data.date])
+    
+    if (loadingInsert){
+        return <h3>Loading...</h3>
+    }
+    
     const onChangeHandle = (e) => {
         e.preventDefault()
         setdata({
@@ -90,13 +108,75 @@ export default function FormCreate() {
 
     const onChangeTickets = (e) => {
         e.preventDefault()
+        setobject({
+            ...object,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const addTicket = (e) => {
+        e.preventDefault()
         setdata((prevState) =>({
             ...prevState,
-            ticket: {
-                ...prevState.ticket,
-                [e.target.name]: e.target.value
+            ticket: [...prevState.ticket,{
+                ticketID: ticketCounter,
+                ticketType: object.ticketType,
+                ticketPrice: object.ticketPrice,
+                ticketInfo: object.ticketInfo
             }
+            ]
         }))
+        setticketCounter(ticketCounter+1)
+    }
+
+    const deleteTicket = (id) => {
+        const newTicket = data.ticket.filter((item)=>item.ticketID !== id)
+        setdata({
+            ...data,
+            ticket: newTicket
+        })
+    }
+
+    const saveEvents = (e) => {
+        e.preventDefault()
+        insertEvent({
+            variables:{
+                object:{
+                    title: data.title,
+                    category: data.category,
+                    event_tags: {data: {tag: data.tag,}},
+                    date: data.date,
+                    time: data.time,
+                    location: data.location,
+                    event_contacts: {data: {
+                        name: data.contact.name,
+                        email: data.contact.email,
+                        phone: data.contact.phone,
+                    }},
+                    pricing: data.pricing,
+                    // type: object.ticketType,
+                    // price: object.ticketPrice,
+                    // information: object.ticketInfo,
+                    description: data.description,
+                }
+            }
+        })
+        console.log(
+            data.title,
+            data.category,
+            data.tag,
+            data.date,
+            data.time,
+            data.location,
+            data.contact.name,
+            data.contact.email,
+            data.contact.phone,
+            data.pricing,
+            object.ticketType,
+            object.ticketPrice,
+            object.ticketInfo,
+            data.description,
+        )
     }
 
     return (
@@ -124,12 +204,10 @@ export default function FormCreate() {
                             </div>
                             <div>
                                 {(data.tag).map((val)=>
-                                    <div>
                                         <div className="btn btn-sm btn-secondary m-1" key={val.id}>
                                             {val.tagValue}
                                             <button className="btn btn-sm btn-dark ms-2 text-white-50" onClick={()=>{deleteTag(val.id)}}>X</button>
                                         </div>
-                                    </div>
                                 )}
                             </div>
                         </div>
@@ -137,7 +215,7 @@ export default function FormCreate() {
                             <label className="form-label" htmlFor="">Category</label>
                             <select className="form-select" name="category" id="" onChange={onChangeHandle}>
                                 <option defaultValue="Category" disabled hidden>Category</option>
-                                <option value="None">None</option>
+                                <option value="">None</option>
                                 <option value="Music">Music</option>
                                 <option value="Game">Game</option>
                             </select>
@@ -181,11 +259,11 @@ export default function FormCreate() {
                         <div className="pricing d-flex">
                             <p className="me-3">Pricing</p>
                             <div className="form-check">
-                                <input className="form-check-input" name="pricing" id="flexRadioDefault1" value="false" type="radio" onChange={onChangeHandle} defaultChecked/>
+                                <input className="form-check-input" name="pricing" id="flexRadioDefault1" value="false" type="radio" defaultChecked/>
                                 <label className="form-check-label" htmlFor="flexRadioDefault1">Free</label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" name="pricing" id="flexRadioDefault2" value="true" type="radio" onChange={onChangeHandle}/>
+                                <input className="form-check-input" name="pricing" id="flexRadioDefault2" value="true" type="radio"/>
                                 <label className="form-check-label" htmlFor="flexRadioDefault2">Paid</label>
                             </div>
                         </div>
@@ -193,37 +271,49 @@ export default function FormCreate() {
                             <table className="table table-bordered text-center">
                                 <thead className="table-dark text-white">
                                     <tr>
-                                        <th className="col-sm-1 pe-3">No</th>
                                         <th className="col-sm-4 pe-3">Ticket Type</th>
                                         <th className="col-sm-2 pe-3">Price $</th>
-                                        <th className="col-sm-5 pe-3">Information</th>
+                                        <th className="col-sm-4 pe-3">Information</th>
+                                        <th className="col-sm-2 pe-3"></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr className="">
-                                        <td className="col-sm-1">{ticketCounter}</td>
-                                        <td className="col-sm-4"><input className="form-control" type="text" name="ticketType" onChange={onChangeTickets}/></td>
-                                        <td className="col-sm-2"><input className="form-control" type="number" min="0" step="0.1" name="ticketPrice" onChange={onChangeTickets}/></td>
-                                        <td className="col-sm-5"><textarea className="form-control" cols="30" rows="2" name="ticketInfo" onChange={onChangeTickets}/></td>
+                                {data?.ticket.map(ticket=> 
+                                    <tr key={ticket.ticketID}>
+                                        <td className="col-sm-4">{ticket.ticketType}</td>
+                                        <td className="col-sm-2">{ticket.ticketPrice}</td>
+                                        <td className="col-sm-4">{ticket.ticketInfo}</td>
+                                        <td className="col-sm-2">
+                                            <button className="btn btn-warning me-2">Edit</button>
+                                            <button className="btn btn-danger" onClick={()=>{deleteTicket(ticket.ticketID)}}>Delete</button>
+                                        </td>
                                     </tr>
+                                    )}
                                 </tbody>
                             </table>
-                            <div className="w-100 text-end">
-                                <button className="btn btn-primary">Add Ticket</button>
-                            </div>
+                            <table>
+                                <thead>
+                                    <tr className="table table-borderless text-center">
+                                        <th className="col-sm-4"><input className="form-control" type="text" placeholder="Example: VIP" name="ticketType" onChange={onChangeTickets}/></th>
+                                        <th className="col-sm-2"><input className="form-control" type="number" min="0" step="0.1" name="ticketPrice" onChange={onChangeTickets}/></th>
+                                        <th className="col-sm-4"><textarea className="form-control" cols="30" rows="1" name="ticketInfo" onChange={onChangeTickets}/></th>
+                                        <th className="col-sm-2"><button className="btn btn-primary" onClick={addTicket}>Add Ticket</button></th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
 
                     <div className="col-sm-12 d-flex flex-column pb-4">
                         <label className="form-label" htmlFor="">Description</label>
-                        <textarea className="form-control" name="" id="" cols="30" rows="10"></textarea>
+                        <textarea className="form-control" name="description" id="" cols="30" rows="10" onChange={onChangeHandle}></textarea>
                     </div>
 
-                    <MapsAPI/>
+                    {/* <MapsAPI/> */}
 
                     <div className="text-end">
-                        <button className="btn btn-primary" type="submit">Save</button>
+                        <button className="btn btn-primary" type="submit" onClick={saveEvents}>Save</button>
                     </div>
                 </form>
             </div>
