@@ -1,7 +1,10 @@
 .choose-img{
-    width: 100%;
-    height: 200px;
+    max-height: 200px;
     background-color: lavender;
+}
+
+.choose-img img{
+    max-height: 200px;
 }
 
 .pricing label{

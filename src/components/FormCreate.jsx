@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import useInsertEvent from '../hooks/useInsertEvent'
+import { storage } from '../firebase'
 // import MapsAPI from './MapsAPI'
 import './formCreate.css'
+import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage'
 
 export default function FormCreate() {
 
@@ -26,6 +28,11 @@ export default function FormCreate() {
     
     const [data, setdata] = useState(initialState)
     const [today, settoday] = useState('')
+
+    const [progress, setprogress] = useState(0)
+    const [bannerview, setbannerview] = useState('')
+    const [url, seturl] = useState('')
+
     const [array, setarray] = useState([])
     const [object, setobject] = useState({
         ticketID:'',
@@ -33,6 +40,7 @@ export default function FormCreate() {
         ticketPrice:0,
         ticketInfo:'',
     })
+
     const [tagCounter, settagCounter] = useState(1)
     const [ticketCounter, setticketCounter] = useState(1)
     const [getDate, setgetDate] = useState(null)
@@ -68,6 +76,41 @@ export default function FormCreate() {
         setarray([
             e.target.value
         ])
+    }
+
+    const uploadFile = (file) => {
+        if (!file) return;
+        const storageRef = ref(storage, `banner/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        uploadTask.on("state_changed", (snapshot) => {
+            const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        setprogress(prog)
+        }, (err) => console.log(err),
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => seturl(url))
+        }
+        )
+    }
+
+    const onChangeImage = (e) =>{
+        const file = e.target.files[0];
+        var reader  = new FileReader();
+
+        reader.onloadend = function () {
+            setbannerview (reader.result)
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+            seturl(file)
+        } 
+
+    }
+
+    const onClickImage = (e) => {
+        // console.log(file)
+        e.preventDefault()
+        uploadFile(url)
     }
 
     const onClickTag = (e) => {
@@ -142,9 +185,10 @@ export default function FormCreate() {
         insertEvent({
             variables:{
                 object:{
+                    banner: url,
                     title: data.title,
                     category: data.category,
-                    event_tags: {data: {tag: data.tag,}},
+                    // event_tags: {data: {tag: data.tag,}},
                     date: data.date,
                     time: data.time,
                     location: data.location,
@@ -154,9 +198,11 @@ export default function FormCreate() {
                         phone: data.contact.phone,
                     }},
                     pricing: data.pricing,
-                    // type: object.ticketType,
-                    // price: object.ticketPrice,
-                    // information: object.ticketInfo,
+                    tickets: {data: [{
+                        type: object.ticketType,
+                        price: object.ticketPrice,
+                        information: object.ticketInfo,
+                    }]},
                     description: data.description,
                 }
             }
@@ -186,8 +232,20 @@ export default function FormCreate() {
             <h3 className="col-sm-12">Create New Event</h3>
             <div>
                 <form action="">
-                    <div className="choose-img col-sm-12 d-flex align-items-center justify-content-center">
-                        <input className="form-control w-50" type="file" id="formFile"/>
+                    <div className="col-sm-12 d-flex flex-column">
+                        <div className="choose-img d-flex align-items-center justify-content-center">
+                            {bannerview? (
+                                <img src={bannerview} alt="Event's Banner"/>
+                                ): console.log("null")}
+                            {/* {url? (
+                                <img src={url} alt="Event's Banner" className="img-upload"/>
+                            ): console.log("null")} */}
+                            <div className="d-flex flex-column">
+                                <input className="form-control w-50" type="file" id="formFile" onChange={onChangeImage}/>
+                                <button className="btn btn-primary w-50" onClick={onClickImage}>Upload</button>
+                                <p>Uploaded {progress} %</p>
+                            </div>
+                        </div>
                     </div>
                     
                     <div className="col-sm-6 d-flex flex-column pb-4">

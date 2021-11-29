@@ -1,4 +1,3 @@
-
 import './App.css';
 import CreateEvent from './pages/CreateEvent';
 
