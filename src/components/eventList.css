@@ -4,8 +4,21 @@
     font-weight: 600;
 }
 
+.card-head{
+    max-height: 100px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-head img{
+    height: fit-content;
+}
+
 .event-item{
     margin-bottom: 10px;
+    --bs-gutter-x: 0;
 }
 
 .event-item a{
