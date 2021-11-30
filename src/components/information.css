@@ -3,11 +3,15 @@
 }
 
 .event-banner{
-    max-height: 65vh;
+    height: 65vh;
+    /* overflow: hidden; */
+    /* display: flex;
+    align-items: center; */
 }
 
 .event-banner img{
-    height: fit-content;
+    height: 100%;
+    width: auto;
 }
 
 .sub-title{

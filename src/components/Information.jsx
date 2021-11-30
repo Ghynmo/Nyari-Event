@@ -1,37 +1,65 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './information.css'
-import ConcertImg from '../assets/01_Preview 3.jpg'
 import MapImg from '../assets/map.png'
+import useInfo from '../hooks/useInfo'
+
+const initialState = {
+    banner: '',
+    title: '',
+    date: '',
+    time: 0,
+    location: '',
+    description: ''
+}
+
+const event_contacts = {
+    name: '',
+    email: '',
+    phone: 0
+}
 
 export default function Information() {
+
+    const {InfoEvent, InfoData} = useInfo()
+    const [state, setstate] = useState(initialState)
+    const [contact, setcontact] = useState(event_contacts)
+
+    useEffect(() => {
+        InfoEvent({ 
+            variables: {
+                id: 18 //props
+            }
+        })
+    }, [])
+
+    useEffect(() => {
+        setstate(InfoData?.events_by_pk)
+        setcontact(InfoData?.events_by_pk.event_contacts[0])
+    }, [InfoData])
+
     return (
         <div className="information-container pb-3">
             <div className="event-banner mb-4">
-                <img className="w-100" src={ConcertImg} alt=""/>
+                <img className="w-100" src={state?.banner} alt=""/>
             </div>
             <div className="information">
-                <h2 className="title">ROCKING CONCERT</h2>
-                <p className="description pe-1">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti eius animi aliquam error ipsam eveniet, cupiditate nulla ducimus aliquid quisquam praesentium officia sed quidem asperiores labore consequatur corrupti ipsum nostrum.
-                    Quia, asperiores facilis. Enim quasi officiis maxime animi quas dolorem vel nulla ipsa, voluptas nesciunt nostrum reiciendis perferendis incidunt sunt maiores corrupti expedita possimus eaque modi ex. Iste, optio porro.
-                    Ex, consequuntur, perferendis magnam mollitia accusamus dolorem nobis modi accusantium sapiente voluptatum blanditiis suscipit fugiat nihil dicta asperiores, esse sunt eveniet debitis saepe quaerat quam! Tempore omnis nobis facilis. Accusantium.
-                    Tempore ipsam ducimus nesciunt eveniet sint, voluptate temporibus voluptas amet similique nam magnam fugit minima fuga nulla! Quos, ea nostrum harum velit at labore sapiente quis cupiditate eligendi enim provident?
-                    <br/><br/>
-                    Consequuntur maxime necessitatibus, consequatur, tempore iste atque distinctio voluptates eveniet aperiam alias esse? Optio velit provident temporibus illo, autem ab accusantium, architecto repudiandae ut deserunt voluptatibus quos quod hic quam.
-                    Alias quidem incidunt iure recusandae, ipsa eligendi ipsum veritatis ut doloribus natus cupiditate minus eos nemo eaque provident placeat vel pariatur ducimus deserunt atque reiciendis? Sit modi cupiditate quasi deserunt?
-                    Beatae eius nulla tenetur magnam. Qui ducimus, adipisci ullam dignissimos, voluptas optio magni quas quidem dolor officiis iure dolores reprehenderit impedit totam porro natus iusto eum dicta alias ipsum laborum.
-                </p>
-                <div className="date mb-2">
+                <h2 className="title">{state?.title}</h2>
+                <p className="description pe-1">{state?.description}</p>
+                <div className="date mb-2 d-flex flex-column">
                     <span className="sub-title">Date</span>
-                    <span>01-02 January 2021</span>
+                    <span>{state?.date}</span>
                 </div>
-                <div className="location mb-2">
+                <div className="location mb-2 d-flex flex-column">
                     <span className="sub-title">Location</span>
-                    <span>Heaven Park, Amsterdam</span>
+                    <span>{state?.location}</span>
                 </div>
                 <div className="contact mb-2">
                     <span className="sub-title">Contact Person</span>
-                    <p>Email : anonymous@mail.com</p>
+                    <div className="d-flex flex-column">
+                        <span>Name : {contact?.name}</span>
+                        <span>Email : {contact?.email}</span>
+                        <span>Phone : {contact?.phone}</span>
+                    </div>
                 </div>
                 <div className="addional-info row d-flex mb-3">
                     <div className="map col-sm-8">
