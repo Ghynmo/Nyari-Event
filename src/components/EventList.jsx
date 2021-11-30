@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import './eventList.css'
 import useGetEvent from '../hooks/useGetEvent'
-import useFilter from '../hooks/useFilter'
 
-export default function EventList() {
+export default function EventList(props) {
 
     const {data, loading, error} = useGetEvent()
+    const [searchTitle, setsearchTitle] = useState('Event')
     const [list, setlist] = useState([])
 
     useEffect(() => {
         setlist(data?.events)
     }, [data])
+
+    useEffect(() => {
+        setlist(props.SearchData?.events)
+        if (props.SearchTitle){
+            setsearchTitle(props.SearchTitle)
+        }
+    }, [props.SearchData])
+
+    useEffect(() => {
+        setlist(props.FilterData?.events)
+    }, [props.FilterData])
 
     if (loading) {
         return <h2>Loading...</h2>
@@ -23,7 +34,7 @@ export default function EventList() {
 
     return (
         <div className="search-result my-5">
-            <div className="title mb-3">Search for <span>...</span> </div>
+            <div className="title mb-3">Search for {searchTitle} </div>
             <div className="list-event row d-flex justify-content-start">
                 {list?.map((item) => {
                     return (
@@ -45,7 +56,6 @@ export default function EventList() {
                         </a>
                     </div>)
                 })}
-
             </div>
         </div>
     )

@@ -50,3 +50,18 @@ export const Filter = gql`
   }
 `
 
+export const Search = gql`
+  query MyQuery($title: String = "") {
+    events(where: {title: {_iregex: $title}}) {
+      id
+      title
+      location
+      time
+      date
+      banner
+      tickets {
+        price
+      }
+    }
+  }
+`

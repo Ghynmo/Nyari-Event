@@ -1,10 +1,10 @@
-import { useQuery } from "@apollo/client"
+import { useLazyQuery } from "@apollo/client"
 import { Filter } from "../graphql/query"
 
 export default function useFilter() {
-    const {data, loading, error} = useQuery(Filter)
+    const [FilterEvent, {data: FilterData, loading: FilterLoading, error: FilterError}] = useLazyQuery(Filter)
     
     return {
-        data, loading, error
+        FilterEvent, FilterData, FilterLoading, FilterError
     }
 }
