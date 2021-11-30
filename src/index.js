@@ -8,10 +8,10 @@ import client from './Apollo-client'
 
 ReactDOM.render(
 <ApolloProvider client={client}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </ApolloProvider>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+</ApolloProvider>,
   document.getElementById('root')
 );
 

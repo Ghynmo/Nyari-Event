@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client'
 import { InsertComment } from '../graphql/mutation'
-import { GetComments } from '../graphql/query'
+import { Comments } from '../graphql/query'
 
 export default function useInsertComment() {
-    const [insertComment, {loading: loadingInsert}] = useMutation(InsertComment)
-        // {refetchQueries: [GetComments]})
+    const [insertComment, {loading: loadingInsert}] = useMutation(InsertComment,
+        {refetchQueries: [Comments]})
     return {
         insertComment, loadingInsert
     }
