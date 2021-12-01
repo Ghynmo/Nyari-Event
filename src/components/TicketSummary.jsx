@@ -21,15 +21,15 @@ export default function TicketSummary() {
         }
     }, [CartSummary])
 
-    // useEffect(() => {
-    //     let num = 0
-    //     if(CartSummary){
-    //         {Data?.map(value=>{value.ticket.map(item=>
-    //             {num += item.price*item.quantity
-    //                 console.log('num',num);
-    //             setTotal(num)})})}
-    //     }
-    // }, [])
+    useEffect(() => {
+        let num = 0
+        if(CartSummary){
+            {Data?.map(value=>{value.ticket.map(item=>
+                {num += item.price*item.quantity
+                    console.log('num',num);
+                setTotal(num)})})}
+        }
+    }, [])
 
     return (
         <div className="buy-ticket card col-12 col-sm-4 col-lg-3 p-3">
