@@ -10,18 +10,18 @@ export default function Profile() {
                 <img className="user-img me-5" src={MyPic} alt=""/>
                 <form className="w-100" action="">
                     <div className="d-flex flex-column pb-3">
-                        <label for="">Name</label>
-                        <input type="text"/>
+                        <label htmlFor="">Name</label>
+                        <input type="text" className="form-control"/>
                     </div>
                     <div className="d-flex flex-column pb-3">
-                        <label for="">Email</label>
-                        <input type="text"/>
+                        <label htmlFor="">Email</label>
+                        <input type="text" className="form-control"/>
                     </div>
                 </form>
             </div>
             <div className="profile-btn text-end">
-                <button>Edit</button>
-                <button>Save</button>
+                <button className="btn btn-outline-primary me-3">Edit</button>
+                <button className="btn btn-primary">Save</button>
             </div>
         </div>
     )

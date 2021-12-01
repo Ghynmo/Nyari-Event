@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-<<<<<<< HEAD
 export const GetEvent = gql`
   query MyQuery {
     events(limit: 10) {
@@ -66,7 +65,6 @@ export const Search = gql`
     }
   }
 `
-=======
 export const GetEvents = gql`
   query MyQuery {
       events {
@@ -93,4 +91,3 @@ export const GetEvents = gql`
       }
     }
 `
->>>>>>> create_event

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import useSearch from '../hooks/useSearch'
 import Logo from '../assets/white t-01.png'
+import {Link} from 'react-router-dom'
 
 
 export default function Navbar(props) {
@@ -10,11 +11,15 @@ export default function Navbar(props) {
     const [SearchValue, setSearchValue] = useState('')
 
     useEffect(() => {
-        props.getSearchData(SearchData)
+        if(props.getSearchData){
+            props.getSearchData(SearchData)
+        }
     }, [SearchData, props])
 
     useEffect(() => {
-        props.getSearchTitle(SearchValue)
+        if(props.getSearchTitle){
+            props.getSearchTitle(SearchValue)
+        }
     }, [SearchValue])
 
     const onChangeSearch = (e) => {
@@ -48,11 +53,11 @@ export default function Navbar(props) {
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul className="nav-right navbar-nav">
-                        <li className="nav-item"><a href="home.html" className="nav-link">Home</a></li>
-                        <li className="nav-item"><a href="cart.html" className="nav-link">Cart</a></li>
-                        <li className="nav-item"><a href="create_event.html" className="nav-link">+ Create Event</a></li>
-                        <li className="nav-item"><a href="home.html" className="nav-link">Notification</a></li>
-                        <li className="nav-item"><a href="login.html" className="nav-link">Profile</a></li>
+                        <li className="nav-item"><Link to='/' className="nav-link">Home</Link></li>
+                        <li className="nav-item"><Link to='/' className="nav-link">Cart</Link></li>
+                        <li className="nav-item"><Link to='/detail/create-event' className="nav-link">+ Create Event</Link></li>
+                        <li className="nav-item"><Link to='/' className="nav-link">Notification</Link></li>
+                        <li className="nav-item"><Link to='/detail/profile' className="nav-link">Profile</Link></li>
                     </ul>
                 </div>
             </div>

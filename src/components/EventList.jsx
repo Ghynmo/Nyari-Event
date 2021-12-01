@@ -10,6 +10,10 @@ export default function EventList(props) {
 
     useEffect(() => {
         setlist(data?.events)
+    }, [])
+
+    useEffect(() => {
+        setlist(data?.events)
     }, [data])
 
     useEffect(() => {
