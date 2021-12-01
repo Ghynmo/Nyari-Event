@@ -1,0 +1,11 @@
+.event-item{
+    border: solid 1px gray;
+}
+
+.card-head{
+    overflow: hidden;
+}
+
+.create-btn button{
+    margin-bottom: 10px;
+}

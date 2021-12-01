@@ -1,0 +1,16 @@
+.choose-img{
+    max-height: 200px;
+    background-color: lavender;
+}
+
+.choose-img img{
+    max-height: 200px;
+}
+
+.pricing label{
+    margin-right: 20px;
+}
+
+.sub-price{
+    align-items:stretch;
+}
