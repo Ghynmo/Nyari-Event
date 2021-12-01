@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from "react-redux"
 import './ticketSummary.css'
 
 export default function TicketSummary() {
+
+    const CartSummary = useSelector((state) => state.CartSummary.CartSummary)
+
+    const [Data, setData] = useState([{
+        ticket: [{
+            price: '',
+            quantity: ''
+        }]
+    }])
+
+    const [Total, setTotal] = useState(0)
+
+    useEffect(() => {
+        if(CartSummary){
+            setData(CartSummary)
+        }
+    }, [CartSummary])
+
     return (
-        <div className="buy-ticket card col-12 col-sm-2 p-3">
+        <div className="buy-ticket card col-12 col-sm-4 col-lg-3 p-3">
+            {console.log(Total)}
             <div className="title"><h4>TICKET SUMMARY</h4></div>
             <div className="price d-flex">
                 <p className="buy-subtitle">Price</p>
-                <p>$60</p>
+                <p>$</p>
             </div>
             <div className="payment d-flex align-items-baseline">
                 <p className="buy-subtitle">Payment</p>
