@@ -50,16 +50,8 @@ export default function AccordionTicket() {
     const [Total, setTotal] = useState(0)
 
     useEffect(() => {
-        // dispatch(TotalCart(Object.entries(List).map(e => e[1])))
-        // console.log('get');
-
-        let num = 0
-        List?.map(value=>{value?.ticket.map(item=>
-            {num += item.price*item.quantity
-            setTotal(num)
-            }
-        )})
-        
+        dispatch(TotalCart(Object.entries(List).map(e => e[1])))
+        console.log('get');
     }, [List])
 
     const DeleteTicket = (ItemIdx, id) => {
