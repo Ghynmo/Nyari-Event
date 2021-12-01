@@ -39,7 +39,7 @@ export default function Navbar(props) {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light shadow px-5">
+        <nav className="navbar navbar-expand-lg fixed-top navbar-light shadow px-5">
             <div className="container">
                 <div className="nav-left d-flex me-auto align-items-center">
                     <img src={Logo} alt="Logo" className="logo pe-2"/>

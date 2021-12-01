@@ -8,7 +8,7 @@ export default function CreateEvent() {
     return (
         <div>
             <Navbar/>
-            <div className="d-flex">
+            <div className="d-flex mt-5">
                 <Sidebar/>
                 <div className="main d-flex col-sm-10 py-5 px-2 justify-content-center">
                     <Outlet/>

@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 export default function Sidebar() {
     return (
-        <div className="sidebar">
+        <div className="sidebar pt-5">
             <div className="user d-flex flex-column align-items-center">
                 <img className="user-img mb-3" src={MyPic} alt=""/>
                 <div className="user-name">M Ghifari</div>

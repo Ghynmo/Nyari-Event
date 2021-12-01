@@ -1,0 +1,28 @@
+.information-container{
+    width: 90%;
+}
+
+.event-banner{
+    height: 65vh;
+    /* overflow: hidden; */
+    /* display: flex;
+    align-items: center; */
+}
+
+.event-banner img{
+    height: 100%;
+    width: auto;
+}
+
+.sub-title{
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.map{
+    max-height: 65vh;
+}
+
+.map img{
+    height: fit-content;
+}

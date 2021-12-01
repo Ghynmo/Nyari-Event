@@ -4,7 +4,7 @@ import ConcertImg from '../assets/01_Preview 3.jpg'
 
 export default function Carousel() {
     return (
-        <div className="banner">
+        <div className="banner mt-5">
             <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
