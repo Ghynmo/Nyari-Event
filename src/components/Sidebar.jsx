@@ -1,6 +1,7 @@
 import React from 'react'
 import './sidebar.css'
 import MyPic from '../assets/Profile1.jpg'
+import {Link} from 'react-router-dom'
 
 export default function Sidebar() {
     return (
@@ -10,10 +11,10 @@ export default function Sidebar() {
                 <div className="user-name">M Ghifari</div>
             </div>
             <ul className="menu pt-5">
-                <li className="profile mb-2">Profile</li>
-                <li className="my-event mb-2">My Event List</li>
-                <li className="create-event mb-2">Create Event</li>
-                <li className="Logout mb-2">Logout</li>
+                <li><Link to='profile' className="profile mb-2">Profile</Link></li>
+                <li><Link to='following-event' className="my-event mb-2">My Event List</Link></li>
+                <li><Link to='create-event' className="create-event mb-2">Create Event</Link></li>
+                <li><Link to='logout' className="Logout mb-2">Logout</Link></li>
             </ul>
         </div>
     )
