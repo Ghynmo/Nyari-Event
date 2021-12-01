@@ -4,10 +4,12 @@ import MyPic from '../assets/Profile1.jpg'
 import useComment from '../hooks/useComments'
 import useInsertComment from '../hooks/useInsertComment'
 
-export default function Comment() {
+export default function Comment(props) {
 
     const {CommentEvent, CommentData} = useComment()
     const [CommentList, setCommentList] = useState([])
+
+    const event_ID = props.event_id
 
     const {insertComment, loadingInsert} = useInsertComment()
     const [inputComment, setinputComment] = useState('')
@@ -15,7 +17,7 @@ export default function Comment() {
     useEffect(() => {
         CommentEvent({ 
             variables: {
-                event_id: 18 //props
+                event_id: event_ID
             }
         })
     }, [])
@@ -39,7 +41,7 @@ export default function Comment() {
         e.preventDefault()
         insertComment({
             variables:{
-                event_id: 18,
+                event_id: event_ID,
                 user_id: 1,
                 comment: inputComment
                 }

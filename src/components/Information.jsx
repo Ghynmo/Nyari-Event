@@ -18,16 +18,18 @@ const event_contacts = {
     phone: 0
 }
 
-export default function Information() {
+export default function Information(props) {
 
+    
     const {InfoEvent, InfoData} = useInfo()
     const [state, setstate] = useState(initialState)
     const [contact, setcontact] = useState(event_contacts)
-
+    const event_id = props.event_id
+    
     useEffect(() => {
         InfoEvent({ 
             variables: {
-                id: 18 //props
+                id: event_id
             }
         })
     }, [])

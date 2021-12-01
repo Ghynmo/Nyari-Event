@@ -11,19 +11,22 @@ const ticketState = [{
     information: ''
 }]
 
-export default function Ticket() {
+export default function Ticket(props) {
 
+    
     const {TicketEvent, TicketData} = useTicket()
     const [state, setstate] = useState(ticketState)
     // const [ticketCount, setticketCount] = useState([{}])
     const CartCounter = useSelector(state => state.CartCounter.CartCounter)
-
+    
+    const event_id = props.event_id
+    
     const dispatch = useDispatch()
 
     useEffect(() => {
         TicketEvent({ 
             variables: {
-                eventId: 1
+                eventId: event_id
             }
         })
     }, [])

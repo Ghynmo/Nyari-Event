@@ -10,6 +10,7 @@ import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import { store, persistor } from "./store/store"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import LaunchEvent from './pages/LaunchEvent';
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
               <Route path=":create-event" element={<FormCreate/>}/>
               <Route path=":created" element={<CreatedEvent/>}/>
               <Route path=":following-event" element={<FollowingEvent/>}/>
-              {/* <EventDetail/> */}
+            </Route>
+            <Route path="event" element={<LaunchEvent/>}>
+              <Route path=":event_id" element={<EventDetail/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

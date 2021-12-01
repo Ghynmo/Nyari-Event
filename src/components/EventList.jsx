@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './eventList.css'
 import useGetEvent from '../hooks/useGetEvent'
+import {Link} from 'react-router-dom'
 
 export default function EventList(props) {
 
@@ -39,11 +40,11 @@ export default function EventList(props) {
     return (
         <div className="search-result my-5">
             <div className="title mb-3">Search for {searchTitle} </div>
-            <div className="list-event row d-flex justify-content-start">
+            <div className="list-event row d-flex justify-content-center">
                 {list?.map((item) => {
                     return (
-                    <div key={item.id} className="event-item col-12 col-sm-6 col-lg-3 card">
-                        <a href="event_detail.html">
+                    <div key={item.id} className="event-item col-12 col-sm-5 col-lg-3 card m-2">
+                        <Link to={`/event/${item.id}`}>
                             <div className="card-head">
                                 <img src={item.banner} alt="" className="card-img-top"/>
                                 <p className="price-card position-absolute top-0 end-0 p-1">{item.tickets.price}</p>
@@ -57,7 +58,7 @@ export default function EventList(props) {
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>)
                 })}
             </div>
