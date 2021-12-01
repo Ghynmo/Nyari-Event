@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import useSearch from '../hooks/useSearch'
+import Logo from '../assets/white t-01.png'
 
 
 export default function Navbar(props) {
@@ -35,9 +36,9 @@ export default function Navbar(props) {
     return (
         <nav className="navbar navbar-expand-lg navbar-light shadow px-5">
             <div className="container">
-                <div className="nav-left d-flex me-auto">
-                    <img src="" alt="Logo" className="logo pe-2"/>
-                    <div className="searchbar">
+                <div className="nav-left d-flex me-auto align-items-center">
+                    <img src={Logo} alt="Logo" className="logo pe-2"/>
+                    <div className="searchbar d-flex">
                         <input className="form-control" type="text" placeholder="Search Here..." name="search" onChange={onChangeSearch}/>
                         <button className="btn btn-outline-light" onClick={onClickSearch}>Search</button>
                     </div>

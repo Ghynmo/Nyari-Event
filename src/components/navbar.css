@@ -5,3 +5,8 @@ nav{
 .nav-link{
     color: white !important;
 }
+
+.logo{
+    width: auto;
+    height: 50px;
+}
