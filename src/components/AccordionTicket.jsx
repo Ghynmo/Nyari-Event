@@ -49,9 +49,24 @@ export default function AccordionTicket() {
 
     const [Total, setTotal] = useState(0)
 
+    // useEffect(() => {
+    //     dispatch(TotalCart(Object.entries(List).map(e => e[1])))
+    //     console.log('get');
+    // }, [List])
+
+
     useEffect(() => {
-        dispatch(TotalCart(Object.entries(List).map(e => e[1])))
-        console.log('get');
+        
+        let jumlah = 0
+        for (let index = 0; index < List.length; index++){
+            for (let y = 0; y < List[index].ticket.length; y++){
+                console.log('y',y,List[index].ticket[y]);
+                jumlah += List[index].ticket[y].quantity
+            }
+        }
+        console.log('jumlah',jumlah);
+        setTotal(jumlah)
+        console.log('list',List);
     }, [List])
 
     const DeleteTicket = (ItemIdx, id) => {
@@ -65,22 +80,40 @@ export default function AccordionTicket() {
         )
     }
 
-    const CounterHandle = (ItemIdx, TicketIdx, incDec) => {
+    const CounterHandlePlus = (ItemIdx, TicketIdx) => {
         setList(
             (prevState) =>({
             ...prevState,
             [ItemIdx]:{...prevState[ItemIdx],
                 ticket: {...prevState[ItemIdx].ticket, 
                     [TicketIdx]:{...prevState[ItemIdx].ticket[TicketIdx], 
-                        quantity: List[ItemIdx].ticket[TicketIdx].quantity + incDec}}
+                        quantity: List[ItemIdx].ticket[TicketIdx].quantity + 1}}
             }
         })
         )
+        console.log('LIST',Object.entries(List).map(e => e[1]));
+        setTotal(Total + 1)
+        // console.log({[ItemIdx] : List[ItemIdx].ticket[TicketIdx].quantity + 1})
+    }
+
+    const CounterHandleMinus = (ItemIdx, TicketIdx) => {
+        setList(
+            (prevState) =>({
+            ...prevState,
+            [ItemIdx]:{...prevState[ItemIdx],
+                ticket: {...prevState[ItemIdx].ticket, 
+                    [TicketIdx]:{...prevState[ItemIdx].ticket[TicketIdx], 
+                        quantity: List[ItemIdx].ticket[TicketIdx].quantity - 1}}
+            }
+        })
+        )
+        // setList((Object.entries(List).map(e => e[1])))
+        setTotal(Total - 1)
     }
 
     return (
         <div className="col-12 col-sm-8 pb-3" >
-            {console.log(Total)}
+            {console.log('total bottom',Total)}
             <div className="accordion col-12 col-sm-12 me-5 pb-3" id="accordionPanelsStayOpenExample">
                 {Object.entries(List).map(e => e[1]).map((item, Itemidx)=> {return(
                     <div key={`event${item.Event_id}`} className="accordion-item mb-3 rounded-3">
@@ -112,9 +145,9 @@ export default function AccordionTicket() {
                                             <div className="quantity">
                                                 <p className="mb-1">Quantity</p>
                                                 <div className="ticket-btn d-flex mb-3">
-                                                    <button className="ticket-min btn btn-light" onClick={()=>CounterHandle(Itemidx, Ticketidx, -1)}>-</button>
+                                                    <button className="ticket-min btn btn-light" onClick={()=>CounterHandleMinus(Itemidx, Ticketidx)}>-</button>
                                                     <div className="counter">{ticket.quantity}</div>
-                                                    <button className="ticket-add btn btn-light" onClick={()=>CounterHandle(Itemidx, Ticketidx, 1)}>+</button>
+                                                    <button className="ticket-add btn btn-light" onClick={()=>CounterHandlePlus(Itemidx, Ticketidx)}>+</button>
                                                 </div>
                                             </div>
                                             <button className="delete-btn p-1 btn btn-danger" onClick={()=>DeleteTicket(Itemidx, ticket.id)}>Delete</button>

@@ -13,7 +13,7 @@ export default function TicketSummary() {
         }]
     }])
 
-    const [Total, setTotal] = useState(0)
+    const [Total, setTotal] = useState([''])
 
     useEffect(() => {
         if(CartSummary){
@@ -21,20 +21,28 @@ export default function TicketSummary() {
         }
     }, [CartSummary])
 
-    useEffect(() => {
-        let num = 0
-        if(CartSummary){
-            {Data?.map(value=>{value.ticket.map(item=>
-                {num += item.price*item.quantity
-                    console.log('num',num);
-                setTotal(num)})})}
-        }
-    }, [])
+    // useEffect(() => {
+    //     let num = 0
+    //     if(CartSummary){
+    //         Data?.map(value=>{value.ticket.map(item=>
+    //             console.log(item.price)
+    //             // setTotal(...Total,(Object.entries(item).map(e => e[1])))
+    //             )})
+
+    //             // for (let i = 0; i < Total.length; i++) {
+    //             //     num += Total[i].price
+    //             //     console.log(Total[i].price);
+    //             //   }
+            
+    //         // console.log(num);
+    //     }
+
+    // }, [Data])
 
     return (
         <div className="buy-ticket card col-12 col-sm-4 col-lg-3 p-3">
-            {console.log('hohoho',Total)}
-            {console.log('data',Data)}
+            {/* {console.log('total', Total)} */}
+            {/* {console.log('data',Data)} */}
             <div className="title"><h4>TICKET SUMMARY</h4></div>
             <div className="price d-flex">
                 <p className="buy-subtitle">Price</p>
