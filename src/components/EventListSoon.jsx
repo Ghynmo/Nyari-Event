@@ -35,7 +35,9 @@ export default function EventListSoon() {
                             <div>
                                 <p className="likes">Likes: {item.likes}</p>
                             </div>
-                            <img src={item.banner} alt=""/>
+                            <div className="HotimgContainer">
+                                <img src={item.banner} alt=""/>
+                            </div>
                         </div>
                     </div>
                 )

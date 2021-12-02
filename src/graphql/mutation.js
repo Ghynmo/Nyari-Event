@@ -15,3 +15,12 @@ mutation MyMutation($comment: String!, $event_id: Int!, $user_id: Int!) {
   }
 }
 `
+
+export const Like = gql`
+mutation MyMutation($id: Int!) {
+  update_events_by_pk(pk_columns: {id: $id}, _inc: {likes: 1}) {
+    id
+    likes
+  }
+}
+`

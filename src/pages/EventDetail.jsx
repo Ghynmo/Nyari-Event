@@ -10,7 +10,7 @@ export default function EventDetail() {
     const { event_id } = useParams()
 
     return (
-        <div className="mx-5 p-4">
+        <div className="mx-5 mt-5 p-4">
             <BreadCrumb/>
             <div className="w-100 row d-flex">
                 <div className="col-12 col-sm-9">

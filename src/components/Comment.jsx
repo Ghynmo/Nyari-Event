@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import './comment.css'
 import MyPic from '../assets/Profile1.jpg'
-import useComment from '../hooks/useComments'
+import useSubscription from '../hooks/useSubscriptionComments'
 import useInsertComment from '../hooks/useInsertComment'
 
 export default function Comment(props) {
 
-    const {CommentEvent, CommentData} = useComment()
+    const event_ID = props.event_id
+    const {CommentData} = useSubscription(event_ID)
     const [CommentList, setCommentList] = useState([])
 
-    const event_ID = props.event_id
 
     const {insertComment, loadingInsert} = useInsertComment()
     const [inputComment, setinputComment] = useState('')
 
-    useEffect(() => {
-        CommentEvent({ 
-            variables: {
-                event_id: event_ID
-            }
-        })
-    }, [])
+    // useEffect(() => {
+    //     CommentEvent({ 
+    //         variables: {
+    //             event_id: event_ID
+    //         }
+    //     })
+    // }, [])
 
     useEffect(() => {
         setCommentList(CommentData?.comments)
@@ -50,7 +50,8 @@ export default function Comment(props) {
 
     return (
         <div>
-            {console.log('input nih bos',inputComment)}
+            {console.log('body Data',CommentData)}
+            
             <div className="comment-container me-5">
                 <h3>Comment</h3>
                 <hr/>

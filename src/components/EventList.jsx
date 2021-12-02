@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './eventList.css'
 import useGetEvent from '../hooks/useGetEvent'
+import useLikes from '../hooks/useLikes'
 import {Link} from 'react-router-dom'
 
 export default function EventList(props) {
 
+    const {AddLikes,loadingLikes} = useLikes()
     const {data, loading, error} = useGetEvent()
     const [searchTitle, setsearchTitle] = useState('Event')
     const [list, setlist] = useState([])
@@ -37,6 +39,14 @@ export default function EventList(props) {
         return null
     }
 
+    const onLike = (id_) =>{
+        AddLikes({
+            variables: {
+                id: id_
+            }
+        })
+    }
+
     return (
         <div className="search-result my-5">
             <div className="title mb-3">Search for {searchTitle} </div>
@@ -44,11 +54,11 @@ export default function EventList(props) {
                 {list?.map((item) => {
                     return (
                     <div key={item.id} className="event-item col-12 col-sm-5 col-lg-3 card m-2">
+                        <div className="card-head">
+                            <img src={item.banner} alt="" className="card-img-top"/>
+                            <button className="price-card position-absolute top-0 end-0 p-1 btn btn-danger" onClick={()=>onLike(item.id)}>like</button>
+                        </div>
                         <Link to={`/event/${item.id}`}>
-                            <div className="card-head">
-                                <img src={item.banner} alt="" className="card-img-top"/>
-                                <p className="price-card position-absolute top-0 end-0 p-1">{item.tickets.price}</p>
-                            </div>
                             <div className="card-body">
                                 <p className="card-title">{item.title}</p>
                                 <div className="d-flex text-muted">

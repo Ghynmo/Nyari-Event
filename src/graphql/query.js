@@ -125,15 +125,3 @@ query MyQuery($eventId: Int!) {
 
 `
 
-export const Comments = gql`
-query MyQuery($event_id: Int!) {
-  comments(where: {event_id: {_eq: $event_id}}) {
-    id
-    comment
-    user {
-      name
-    }
-  }
-}
-
-`
