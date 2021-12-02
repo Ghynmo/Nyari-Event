@@ -6,11 +6,12 @@ import FollowingEvent from './components/FollowingEvent'
 import CreatedEvent from './components/CreatedEvent'
 import FormCreate from './components/FormCreate'
 import EventDetail from './pages/EventDetail';
+import LaunchEvent from './pages/LaunchEvent';
+import Cart from './pages/Cart';
 import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
 import { store, persistor } from "./store/store"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LaunchEvent from './pages/LaunchEvent';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="event" element={<LaunchEvent/>}>
               <Route path=":event_id" element={<EventDetail/>}/>
             </Route>
+            <Route path="/cart" element={<Cart/>}></Route>
           </Routes>
         </BrowserRouter>
       </PersistGate>

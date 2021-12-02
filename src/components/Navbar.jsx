@@ -54,7 +54,7 @@ export default function Navbar(props) {
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul className="nav-right navbar-nav">
                         <li className="nav-item"><Link to='/' className="nav-link">Home</Link></li>
-                        <li className="nav-item"><Link to='/' className="nav-link">Cart</Link></li>
+                        <li className="nav-item"><Link to='/cart' className="nav-link">Cart</Link></li>
                         <li className="nav-item"><Link to='/detail/create-event' className="nav-link">+ Create Event</Link></li>
                         <li className="nav-item"><Link to='/' className="nav-link">Notification</Link></li>
                         <li className="nav-item"><Link to='/detail/profile' className="nav-link">Profile</Link></li>
