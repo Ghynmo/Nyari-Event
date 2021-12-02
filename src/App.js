@@ -1,4 +1,5 @@
 import './App.css';
+import Login from './pages/Login';
 import Home from './pages/Home';
 import CreateEvent from './pages/CreateEvent';
 import Profile from './components/Profile'
@@ -19,6 +20,7 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <Routes>
+            <Route path="/login" element={<Login/>}></Route>
             <Route path="/" element={<Home/>}></Route>
             <Route path="/detail" element={<CreateEvent/>}>
               <Route path=":profile" element={<Profile/>}/>
