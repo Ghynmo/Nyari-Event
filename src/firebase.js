@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getStorage } from "@firebase/storage";
+import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 import "firebase/storage"
 
 const firebaseConfig = {
@@ -13,7 +13,7 @@ const firebaseConfig = {
   measurementId: "G-ZPC1NFV6G2"
 };
 
-// Initialize Firebase
+// Initialize Firebase feature that you want, i'll using [Storage for store the image] & [Auth for Login Authentication]
 export const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 export const storage = getStorage(app)
+export const auth = getAuth(app)
